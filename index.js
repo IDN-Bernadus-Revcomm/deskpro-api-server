@@ -1,9 +1,10 @@
 // index.js
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 const app = express();
 
-// Use JSON middleware to parse incoming JSON payloads
+app.use(cors());
 app.use(express.json());
 
 // Endpoint to create a new ticket in Deskpro
