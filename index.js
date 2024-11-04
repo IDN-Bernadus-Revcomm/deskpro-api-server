@@ -17,6 +17,10 @@ function formatPhoneNumber(rawNumber) {
         digits = digits.slice(1); // Remove leading '0'
     }
 
+    if (digits.length <= 7) {
+        return "+62 (0) " + digits; // Handle short numbers directly
+    }
+
     let formattedNumber = "+62 (0) ";
     if (digits.length >= 10) {
         formattedNumber += digits.slice(0, 3) + " " + digits.slice(3, 6) + " " + digits.slice(6);
