@@ -18,7 +18,7 @@ function formatPhoneNumber(rawNumber) {
     }
 
     if (digits.length < 7) {
-        return "+62 (0) " + digits +" 000 0000"; // Handle short numbers directly
+        return "+62 (0) " + digits +" 000 1234"; // Handle short numbers directly
     }
 
     let formattedNumber = "+62 (0) ";
