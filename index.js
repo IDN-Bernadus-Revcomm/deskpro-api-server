@@ -7,10 +7,35 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Function to format the phone number
+function formatPhoneNumber(rawNumber) {
+    let digits = rawNumber.replace(/\D/g, '');
+
+    if (digits.startsWith('62')) {
+        digits = digits.slice(2); // Remove '62' country code
+    } else if (digits.startsWith('0')) {
+        digits = digits.slice(1); // Remove leading '0'
+    }
+
+    let formattedNumber = "+62 (0) ";
+    if (digits.length >= 10) {
+        formattedNumber += digits.slice(0, 3) + " " + digits.slice(3, 6) + " " + digits.slice(6);
+    } else if (digits.length >= 7) {
+        formattedNumber += digits.slice(0, 3) + " " + digits.slice(3);
+    } else {
+        formattedNumber += digits; 
+    }
+
+    return formattedNumber;
+}
+
 // Endpoint to create a new ticket in Deskpro
 app.post('/create-ticket', async (req, res) => {
     // Extract ticket data from request body
     const { phoneNumber } = req.body;
+
+    // Format the phone number using the function
+    const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
 
     // Generate the current date and time
     const now = new Date();
@@ -18,8 +43,8 @@ app.post('/create-ticket', async (req, res) => {
     const time = now.toTimeString().split(' ')[0]; // Format: HH:MM:SS
 
     // Static values for message content and dynamic subject
-    const subject = `Ticket: ${phoneNumber} - ${date} ${time}`;
-    const messageContent = `This ticket created from Miitel for phone number ${phoneNumber}`;
+    const subject = `Ticket: ${formattedPhoneNumber} - ${date} ${time}`;
+    const messageContent = `This ticket created from Miitel for phone number ${formattedPhoneNumber}`;
 
     // Step 1: Create the ticket with a static person name "Unknown"
     const ticketData = {
@@ -57,7 +82,7 @@ app.post('/create-ticket', async (req, res) => {
                 phone_numbers: [
                     {
                         label: "Work",
-                        number: phoneNumber
+                        number: formattedPhoneNumber
                     }
                 ]
             };
