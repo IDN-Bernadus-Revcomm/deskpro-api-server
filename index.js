@@ -27,7 +27,7 @@ function formatPhoneNumber(rawNumber) {
     } else if (digits.length >= 7) {
         formattedNumber += digits.slice(0, 3) + " " + digits.slice(3);
     } else {
-        formattedNumber += digits +" 000 1234"; 
+        formattedNumber += digits +" 1234"; 
     }
 
     return formattedNumber;
