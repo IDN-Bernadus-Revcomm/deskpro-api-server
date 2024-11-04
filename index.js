@@ -42,7 +42,7 @@ app.post('/create-ticket', async (req, res) => {
             ticketData,
             {
                 headers: {
-                    'Authorization': 'key 2:J668NYJN35DQB87A769RHQCKJ',
+                    'Authorization': 'key 2:KAHSQ7Q9PBMW9GNW5RW9N3Q3A',
                     'Content-Type': 'application/json'
                 }
             }
@@ -67,7 +67,7 @@ app.post('/create-ticket', async (req, res) => {
                 phoneData,
                 {
                     headers: {
-                        'Authorization': 'key 2:J668NYJN35DQB87A769RHQCKJ',
+                        'Authorization': 'key 2:KAHSQ7Q9PBMW9GNW5RW9N3Q3A',
                         'Content-Type': 'application/json'
                     }
                 }
