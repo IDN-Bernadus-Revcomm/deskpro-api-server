@@ -4,8 +4,18 @@ const axios = require('axios');
 const cors = require('cors');
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://revcomm.deskpro.com',
+    methods: ['GET', 'POST', 'OPTIONS'], // Specify allowed methods
+    allowedHeaders: ['Content-Type'], // Specify allowed headers
+    optionsSuccessStatus: 200 // For older browsers to respond to OPTIONS requests
+}));
+
 app.use(express.json());
+
+app.options('/create-ticket', cors({
+    origin: 'https://revcomm.deskpro.com'
+}));
 
 // Function to format the phone number
 function formatPhoneNumber(rawNumber) {
